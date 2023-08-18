@@ -1,6 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pandas as pd
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+
 def get_timing(flight_num,days_back):
     chrome_options = Options()
     chrome_options.add_argument("disable-blink-features=AutomationControlled")
@@ -14,7 +17,8 @@ def get_timing(flight_num,days_back):
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ' \
                  'Chrome/92.0.4515.159 Safari/537.36 '
     chrome_options.add_argument(f'user-agent={user_agent}')
-    driver = webdriver.Chrome('chromedriver',options=chrome_options)
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
     url="https://www.planemapper.com/flights/{}".format(flight_num)
     driver.get(url)
     # Fetch and print the page source
