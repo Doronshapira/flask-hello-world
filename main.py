@@ -17,16 +17,12 @@ def get_timing(flight_num,days_back):
     chrome_options.add_argument(f'user-agent={user_agent}')
     driver = webdriver.Chrome(options=chrome_options)
     url="https://www.planemapper.com/flights/{}".format(flight_num)
-    print('getting_time2')
-
     driver.get(url)
-    print('getting_time3')
     # Fetch and print the page source
     data = driver.page_source
     driver.close()
     tables = pd.read_html(data)
     flights_table = tables[4]
-    print('getting_time4')
     def analyze_flight_data(df,days_back):
         days_back=int(days_back)
         print(days_back)
