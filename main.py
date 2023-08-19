@@ -19,7 +19,7 @@ def get_timing(flight_num,days_back):
                  'Chrome/92.0.4515.159 Safari/537.36 '
     chrome_options.add_argument(f'user-agent={user_agent}')
     # Add any additional options to the ChromeOptions if needed
-    driver=webdriver.Chrome(service=Service('/usr/bin/chromedriver'), options=chrome_options)
+    driver=wwebdriver.Remote("http://127.0.0.1:4444/wd/hub", desired_capabilities=chrome_options.to_capabilities())
     url="https://www.planemapper.com/flights/{}".format(flight_num)
     driver.get(url)
     # Fetch and print the page source
