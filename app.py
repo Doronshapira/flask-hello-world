@@ -10,7 +10,6 @@ def home():
 
 @app.route('/flights_api/<flight_number>', methods=['GET'])
 def get_items(flight_number):
-    print('hi')
     days = int(request.args.get('days', default=7))
     return jsonify(get_timing(flight_number, days))
 
