@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pandas as pd
+from selenium.webdriver.chrome.service import Service
 
 def get_timing(flight_num,days_back):
     chrome_options = Options()
@@ -16,7 +17,7 @@ def get_timing(flight_num,days_back):
                  'Chrome/92.0.4515.159 Safari/537.36 '
     chrome_options.add_argument(f'user-agent={user_agent}')
     # Add any additional options to the ChromeOptions if needed
-    driver = webdriver.Chrome(executable_path='/usr/bin/chromedriver', options=chrome_options)
+    driver=webdriver.Chrome(service=Service('/usr/bin/chromedriver'), options=chrome_options)
     url="https://www.planemapper.com/flights/{}".format(flight_num)
     driver.get(url)
     # Fetch and print the page source
