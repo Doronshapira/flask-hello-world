@@ -16,7 +16,6 @@ def get_timing(flight_num,days_back):
         "-p", "4444:4444", "-p", "7800:7800", "selenium/standalone-chrome:115.0"
     ]
     # subprocess.run(docker_run_command, check=True)
-    time.sleep(5)
     chrome_options = Options()
     chrome_options.add_argument("disable-blink-features=AutomationControlled")
     chrome_options.add_argument("--disable-extensions")
@@ -35,7 +34,7 @@ def get_timing(flight_num,days_back):
     driver.get(url)
     # Fetch and print the page source
     data = driver.page_source
-    driver.close()
+    driver.quit()
     # Remove all Docker containers
     container_name = "chrome_docker"
     # subprocess.run(["docker", "rm", container_name])
