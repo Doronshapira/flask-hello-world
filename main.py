@@ -16,7 +16,7 @@ def get_timing(flight_num,days_back):
         "-p", "4444:4444", "-p", "7800:7800", "selenium/standalone-chrome:115.0"
     ]
     subprocess.run(docker_run_command, check=True)
-    time.sleep(1)
+    time.sleep(5)
     chrome_options = Options()
     chrome_options.add_argument("disable-blink-features=AutomationControlled")
     chrome_options.add_argument("--disable-extensions")
@@ -25,7 +25,7 @@ def get_timing(flight_num,days_back):
     chrome_options.add_argument("disable-infobars")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument('--no-sandbox')
-    # chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--headless')
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ' \
                  'Chrome/92.0.4515.159 Safari/537.36 '
     chrome_options.add_argument(f'user-agent={user_agent}')
