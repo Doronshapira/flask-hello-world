@@ -2,10 +2,20 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import pandas as pd
 from selenium.webdriver.chrome.service import Service
+import subprocess
+
+
+
 
 
 
 def get_timing(flight_num,days_back):
+    # Run the selenium/standalone-chrome container
+    docker_run_command = [
+        "docker", "run", "-d", "--name", "chrome_docker",
+        "-p", "4444:4444", "-p", "7800:7800", "selenium/standalone-chrome:115.0"
+    ]
+    subprocess.run(docker_run_command, check=True)
     chrome_options = Options()
     chrome_options.add_argument("disable-blink-features=AutomationControlled")
     chrome_options.add_argument("--disable-extensions")
@@ -25,6 +35,9 @@ def get_timing(flight_num,days_back):
     # Fetch and print the page source
     data = driver.page_source
     driver.close()
+    # Remove all Docker containers
+    docker_rm_command = ["docker", "rm", "-f", "$(docker ps -a -q)"]
+    subprocess.run(docker_rm_command, check=True)
     tables = pd.read_html(data)
     flights_table = tables[4]
     def analyze_flight_data(df,days_back):
