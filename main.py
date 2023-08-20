@@ -37,8 +37,8 @@ def get_timing(flight_num,days_back):
     data = driver.page_source
     driver.close()
     # Remove all Docker containers
-    docker_rm_command = ["docker", "rm", "-f", "$(docker ps -a -q)"]
-    subprocess.run(docker_rm_command, check=True)
+    container_name = "chrome_docker"
+    subprocess.run(["docker", "rm", container_name])
     tables = pd.read_html(data)
     flights_table = tables[4]
     def analyze_flight_data(df,days_back):
