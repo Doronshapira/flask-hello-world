@@ -55,7 +55,7 @@ def get_timing(flight_num,days_back):
         try:
             departure_airport = df.iloc[0]['Departure Airport', 'Departure Airport']
             arrival_airport = df.iloc[0]['Arrival Airport', 'Arrival Airport']
-        else:
+        except:
             return None
 
         result = {
