@@ -15,7 +15,7 @@ def get_timing(flight_num,days_back):
         "docker", "run", "-d", "--name", "chrome_docker",
         "-p", "4444:4444", "-p", "7800:7800", "selenium/standalone-chrome:115.0"
     ]
-    subprocess.run(docker_run_command, check=True)
+    # subprocess.run(docker_run_command, check=True)
     time.sleep(5)
     chrome_options = Options()
     chrome_options.add_argument("disable-blink-features=AutomationControlled")
@@ -38,7 +38,7 @@ def get_timing(flight_num,days_back):
     driver.close()
     # Remove all Docker containers
     container_name = "chrome_docker"
-    subprocess.run(["docker", "rm", container_name])
+    # subprocess.run(["docker", "rm", container_name])
     tables = pd.read_html(data)
     flights_table = tables[4]
     def analyze_flight_data(df,days_back):
