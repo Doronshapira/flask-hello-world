@@ -16,6 +16,7 @@ def get_timing(flight_num,days_back):
         "-p", "4444:4444", "-p", "7800:7800", "selenium/standalone-chrome:115.0"
     ]
     subprocess.run(docker_run_command, check=True)
+    time.sleep(1)
     chrome_options = Options()
     chrome_options.add_argument("disable-blink-features=AutomationControlled")
     chrome_options.add_argument("--disable-extensions")
