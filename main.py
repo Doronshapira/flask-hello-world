@@ -46,6 +46,7 @@ def get_timing(flight_num,days_back):
         # Drop the first row if it contains any null values
         df = df.iloc[1:].dropna()
         df = df.head(days_back)
+        print(df)
         # Extract only the time from the scheduled and estimated columns
         df['Scheduled', 'Arrival'] = df['Scheduled', 'Arrival'].str.split(' ').str[0]
         df['Estimated', 'Arrival'] = df['Estimated', 'Arrival'].str.split(' ').str[0]
