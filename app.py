@@ -1,5 +1,8 @@
 from flask import Flask, jsonify,request
 from main import get_timing
+from werkzeug.middleware.proxy_fix import ProxyFix
+from flask_sslify import SSLify
+
 
 
 app = Flask(__name__)
@@ -14,4 +17,6 @@ def get_items(flight_number):
     return jsonify(get_timing(flight_number, days))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.wsgi_app = ProxyFix(app.wsgi_app)
+    sslify = SSLify(app, permanent=True)
+    app.run(host='0.0.0.0', port=443, ssl_context=('/etc/pki/tls/certs/localhost.crt', '/etc/pki/tls/private/localhost.key'))
