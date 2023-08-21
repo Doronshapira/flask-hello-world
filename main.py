@@ -44,6 +44,8 @@ def get_timing(flight_num,days_back):
         # Calculate delays based on the scheduled time being later than the estimated time
         df['Delayed'] = (df['Scheduled', 'Arrival'] < df['Estimated', 'Arrival'])
         num_delays = df['Delayed'].sum()
+        print(round((int(num_delays)/days_back),2))
+        print(num_delays)
         result = {
             'Departure Airport': departure_airport,
             'Arrival Airport': arrival_airport,
