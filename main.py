@@ -4,6 +4,9 @@ import pandas as pd
 from selenium.webdriver.chrome.service import Service
 import subprocess
 import time
+from datetime import datetime
+
+
 
 
 
@@ -49,15 +52,31 @@ def get_timing(flight_num,days_back):
         df = df.iloc[1:].dropna()
         df = df.head(days_back)
         # Extract only the time from the scheduled and estimated columns
-        df['Delay'] = df[('Estimated', 'Departure')] > df[('Scheduled', 'Departure')]
-        # Count the number of delays
-        number_of_delays = df['Delay'].sum()
+        num_delays = 0  # Counter for delays
+        
+        for index, row in df.iterrows():
+            scheduled_departure = row[('Scheduled', 'Departure')]
+            estimated_departure = row[('Estimated', 'Departure')]
+            
+            if isinstance(scheduled_departure, str) and isinstance(estimated_departure, str):
+                # Remove timezone abbreviations
+                scheduled_time = scheduled_departure.split(' ')[0]
+                estimated_time = estimated_departure.split(' ')[0]
+                
+                # Convert to datetime objects
+                scheduled_time_obj = datetime.strptime(scheduled_time, '%I:%M').time()
+                estimated_time_obj = datetime.strptime(estimated_time, '%I:%M').time()
+                
+                # Check for delay
+                if estimated_time_obj > scheduled_time_obj:
+                    num_delays += 1
+        
 
         result = {
             'Departure Airport': departure_airport,
             'Arrival Airport': arrival_airport,
-            'Number of Delays': str(number_of_delays),
-            'Delay Probability' : str(round((number_of_delays/days_back),2))
+            'Number of Delays': str(num_delays),
+            'Delay Probability' : str(round((num_delays/days_back),2))
         }
         return result
 
