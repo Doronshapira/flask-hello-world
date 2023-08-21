@@ -1,11 +1,12 @@
-from flask import Flask, jsonify,request
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 from main import get_timing
 from werkzeug.middleware.proxy_fix import ProxyFix
 from flask_sslify import SSLify
 
-
-
 app = Flask(__name__)
+CORS(app, origins=["https://www.your-wix-app-domain.com"], supports_credentials=True)
+
 @app.route('/')
 def home():
     print('go')
