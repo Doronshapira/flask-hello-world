@@ -14,4 +14,4 @@ def get_items(flight_number):
     return jsonify(get_timing(flight_number, days))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=443)
