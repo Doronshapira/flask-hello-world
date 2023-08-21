@@ -59,7 +59,6 @@ def get_timing(flight_num,days_back):
             'Number of Delays': str(num_delays),
             'Delay Probability' : str(round((num_delays/days_back),2))
         }
-        print(result)
         return result
 
     return(analyze_flight_data(flights_table,days_back))
