@@ -5,7 +5,7 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 from flask_sslify import SSLify
 
 app = Flask(__name__)
-CORS(app, origins=["https://www.your-wix-app-domain.com"], supports_credentials=True)
+CORS(app, origins=["www.flightiming.com"], supports_credentials=True)
 
 @app.route('/')
 def home():
