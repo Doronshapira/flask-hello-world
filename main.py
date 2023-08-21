@@ -57,6 +57,8 @@ def get_timing(flight_num,days_back):
         for index, row in df.iterrows():
             scheduled_departure = row[('Scheduled', 'Departure')]
             estimated_departure = row[('Estimated', 'Departure')]
+            print(scheduled_departure)
+            print(estimated_departure)
             
             if isinstance(scheduled_departure, str) and isinstance(estimated_departure, str):
                 # Remove timezone abbreviations
