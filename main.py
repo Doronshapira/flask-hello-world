@@ -44,6 +44,7 @@ def get_timing(flight_num,days_back):
         print(table)
         print()
     flights_table = tables[4]
+    print(flights_table['Departure Airport'])
     def analyze_flight_data(df,days_back):
         days_back=int(days_back)
         # Drop the first row if it contains any null values
