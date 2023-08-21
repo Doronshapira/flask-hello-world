@@ -16,7 +16,15 @@ def home():
 @app.route('/flights_api/<flight_number>', methods=['GET'])
 def get_items(flight_number):
     days = int(request.args.get('days', default=7))
-    return jsonify(get_timing(flight_number, days))
+
+    response = jsonify(get_timing(flight_number, days))
+    
+    # Add CORS headers to the response
+    response.headers['Access-Control-Allow-Origin'] = 'https://www.theflightiming.com'
+    response.headers['Access-Control-Allow-Methods'] = 'GET'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    return response
 
 if __name__ == '__main__':
     app.wsgi_app = ProxyFix(app.wsgi_app)
