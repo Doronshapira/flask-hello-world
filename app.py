@@ -6,7 +6,7 @@ from flask_sslify import SSLify
 
 app = Flask(__name__)
 CORS(app, origins=["www.flightiming.com","https://4a7abb7c-2293-4673-bbd3-7390068b6773.dev.wix-code.com","https://doronsh8.wixstudio.io/my-site-87","https://doronsh8.wixstudio.io"
-                  "https://doronsh8.wixstudio.io/"], supports_credentials=True)
+                  "https://doronsh8.wixstudio.io/","doronsh8.wixstudio.io/my-site-87","doronsh8.wixstudio.io/"], supports_credentials=True)
 
 @app.route('/')
 def home():
