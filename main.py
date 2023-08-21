@@ -39,10 +39,6 @@ def get_timing(flight_num,days_back):
     container_name = "chrome_docker"
     # subprocess.run(["docker", "rm", container_name])
     tables = pd.read_html(data)
-    for i,table in enumerate(tables):
-        print(i)
-        print(table)
-        print()
     flights_table = tables[4]
     def analyze_flight_data(df,days_back):
         departure_airport = df['Departure Airport'].iloc[0]
@@ -57,9 +53,6 @@ def get_timing(flight_num,days_back):
         # Calculate delays based on the scheduled time being later than the estimated time
         df['Delayed'] = (df['Scheduled', 'Arrival'] < df['Estimated', 'Arrival'])
         num_delays = df['Delayed'].sum()
-        print(df.columns)
-        departure_airport = df['Departure Airport']
-        arrival_airport =   df['Arrival Airport', 'Arrival Airport']
         print(departure_airport)
 
         result = {
