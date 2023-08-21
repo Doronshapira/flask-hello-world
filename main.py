@@ -50,7 +50,7 @@ def get_timing(flight_num,days_back):
             'Departure Airport': departure_airport,
             'Arrival Airport': arrival_airport,
             'Number of Delays': 'Flights with delay : '+str(num_delays),
-            'Delay Probability' : 'Probability for a delay : {}'.format(round((int(num_delays)/days_back),2))
+            'Delay Probability' : str(round((int(num_delays)/days_back),2))
         }
         return result
 
