@@ -50,28 +50,8 @@ def get_timing(flight_num,days_back):
         # Drop the first row if it contains any null values
         df = df.iloc[1:].dropna()
         df = df.head(days_back)
-        # Extract only the time from the scheduled and estimated columns
-        num_delays = 0  # Counter for delays
-        
-        for index, row in df.iterrows():
-            print(row)
-            scheduled_departure = row[('Scheduled', 'Departure')]
-            estimated_departure = row[('Estimated', 'Departure')]
-            print(scheduled_departure)
-            print(estimated_departure)
-            
-            if isinstance(scheduled_departure, str) and isinstance(estimated_departure, str):
-                # Remove timezone abbreviations
-                scheduled_time = scheduled_departure.split(' ')[0]
-                estimated_time = estimated_departure.split(' ')[0]
-                
-                # Convert to datetime objects
-                scheduled_time_obj = datetime.strptime(scheduled_time, '%I:%M').time()
-                estimated_time_obj = datetime.strptime(estimated_time, '%I:%M').time()
-                
-                # Check for delay
-                if estimated_time_obj > scheduled_time_obj:
-                    num_delays += 1
+        num_delays=6
+        print(df)
         
 
         result = {
