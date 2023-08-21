@@ -49,18 +49,15 @@ def get_timing(flight_num,days_back):
         df = df.iloc[1:].dropna()
         df = df.head(days_back)
         # Extract only the time from the scheduled and estimated columns
-        scheduled = df['Scheduled', 'Arrival']
-        actual = df['Estimated', 'Arrival']
-        print(scheduled)
-        print(actual)
-        # Calculate delays based on the scheduled time being later than the estimated time
-        df['Delayed'] = actual>scheduled
-        num_delays = df['Delayed'].sum()
+        df['Delay'] = df[('Estimated', 'Departure')] > df[('Scheduled', 'Departure')]
+        # Count the number of delays
+        number_of_delays = df['Delay'].sum()
+
         result = {
             'Departure Airport': departure_airport,
             'Arrival Airport': arrival_airport,
             'Number of Delays': str(num_delays),
-            'Delay Probability' : str(round((num_delays/days_back),2))
+            'Delay Probability' : str(round((number_of_delays/days_back),2))
         }
         return result
 
