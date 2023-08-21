@@ -6,19 +6,8 @@ import subprocess
 import time
 from datetime import datetime
 
-
-
-
-
-
-
 def get_timing(flight_num,days_back):
     # Run the selenium/standalone-chrome container
-    docker_run_command = [
-        "docker", "run", "-d", "--name", "chrome_docker",
-        "-p", "4444:4444", "-p", "7800:7800", "selenium/standalone-chrome:115.0"
-    ]
-    # subprocess.run(docker_run_command, check=True)
     chrome_options = Options()
     chrome_options.add_argument("disable-blink-features=AutomationControlled")
     chrome_options.add_argument("--disable-extensions")
@@ -58,8 +47,8 @@ def get_timing(flight_num,days_back):
         result = {
             'Departure Airport': departure_airport,
             'Arrival Airport': arrival_airport,
-            'Number of Delays': str(num_delays),
-            'Delay Probability' : str(round((num_delays/days_back),2))
+            'Number of Delays': 'Flights with delay'+str(num_delays),
+            'Delay Probability' : 'Probability for a delay'+str(round((num_delays/days_back),2))
         }
         return result
 
