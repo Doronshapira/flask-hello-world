@@ -39,12 +39,13 @@ def get_timing(flight_num,days_back):
     container_name = "chrome_docker"
     # subprocess.run(["docker", "rm", container_name])
     tables = pd.read_html(data)
-    for table in tables:
+    for i,table in enumerate(tables):
+        print(i)
         print(table)
+        print()
     flights_table = tables[4]
     def analyze_flight_data(df,days_back):
         days_back=int(days_back)
-        print(days_back)
         # Drop the first row if it contains any null values
         df = df.iloc[1:].dropna()
         df = df.head(days_back)
