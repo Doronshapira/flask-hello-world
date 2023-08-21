@@ -56,7 +56,7 @@ def get_timing(flight_num,days_back):
         df['Delayed'] = (df['Scheduled', 'Arrival'] < df['Estimated', 'Arrival'])
         num_delays = df['Delayed'].sum()
         print(df.columns)
-        departure_airport = df['Departure Airport', 'Departure Airport']
+        departure_airport = df['Departure Airport']
         arrival_airport =   df['Arrival Airport', 'Arrival Airport']
         print(departure_airport)
 
